@@ -12,8 +12,6 @@ public class Program
 
         App app = services.GetService<App>();
 
-        app.Build();
-
         app.Run();
     }
 

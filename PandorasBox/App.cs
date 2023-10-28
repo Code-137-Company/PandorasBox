@@ -1,6 +1,6 @@
-﻿using Gtk;
-using PandorasBox.Components;
+﻿using PandorasBox.Components;
 using PandorasBox.Service.Services.Interfaces;
+using Spectre.Console;
 
 namespace PandorasBox
 {
@@ -13,33 +13,29 @@ namespace PandorasBox
             _dashboard = dashboard;
         }
 
-        public void Build()
+        public void Run()
         {
-            Application.Init();
+            var t = new ConsoleInteration();
 
-            PBWindow window = new PBWindow("Pandoras Box", 500, 500);
-
-            PBButton button = new PBButton("Click-me");
-            button.Clicked += (sender, e) =>
+            var test = t.Select("Testing", new[]
             {
-                _dashboard.PowerLed();
-            };
+                "Test 1",
+                "Test 2",
+                "Test 3",
+                "Test 4",
+                "Test 5",
+                "Test 6",
+                "Test 7",
+                "Test 8",
+                "Test 9",
+                "Test 10",
+                "Test 11",
+                "Test 12",
+                "Test 13",
+            });
 
-            PBButton buttonTwo = new PBButton("Click-me");
-            buttonTwo.Clicked += (sender, e) =>
-            {
-                _dashboard.AllReles();
-            };
-
-            PBFrame frame = new PBFrame("Teste");
-
-            //frame.Add(button);
-            frame.Add(buttonTwo);
-            window.Add(frame);
-
-            window.ShowAll();
+            Console.WriteLine(test);
+            Console.ReadKey();
         }
-
-        public void Run() => Application.Run();
     }
 }
