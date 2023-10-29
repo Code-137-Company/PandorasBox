@@ -14,15 +14,17 @@ namespace PandorasBox.Components
             return AnsiConsole.Ask<T>($"{title} > ");
         }
 
-        public string Select(string title, string[] selections)
+        public T Select<T>(string title) where T : Enum
         {
             var selection = new SelectionPrompt<string>()
                 .Title(title)
                 .PageSize(10)
                 .MoreChoicesText("Move up and down to reveal more options")
-                .AddChoices(selections);
+                .AddChoices(Enum.GetNames(typeof(T)));
 
-            return AnsiConsole.Prompt(selection);
+            var result = AnsiConsole.Prompt(selection);
+
+            return (T)Enum.Parse(typeof(T), result);
         }
     }
 }

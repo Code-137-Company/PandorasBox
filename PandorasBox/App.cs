@@ -1,4 +1,5 @@
 ﻿using PandorasBox.Components;
+using PandorasBox.Domain.Enums;
 using PandorasBox.Service.Services.Interfaces;
 
 namespace PandorasBox
@@ -14,16 +15,23 @@ namespace PandorasBox
 
         public void Run()
         {
-            var c = new ConsoleInteration();
+            var console = new ConsoleInteration();
 
-            c.Select("Test", new[]
+            while (true)
             {
-                "Test 1",
-                "Test 2",
-                "Test 3",
-                "Test 4",
-                "Test 5",
-            });
+                var result = console.Select<SelectOptionsEnum>("Select Option");
+
+                switch (result)
+                {
+                    case SelectOptionsEnum.PowerLed:
+                        _dashboard.PowerLed();
+                        break;
+
+                    case SelectOptionsEnum.AllReles:
+                        _dashboard.AllReles();
+                        break;
+                }
+            }
 
             Console.ReadKey();
         }
